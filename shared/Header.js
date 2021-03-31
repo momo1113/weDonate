@@ -1,19 +1,20 @@
 
 import React from 'react';
-import { StyleSheet, Text, View, Button, BackHandler } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'
 
-const Header = ({ navigation }) => {
+const Header = ({ navigation, post }) => {
     const pressHandler = () => {
         navigation.navigate('Post')
     }
+
     return (
         <View style={styles.header}>
-            <View style={styles.profile}  >
-                <MaterialIcons name="face" size={30} color="black" />
+            <View   >
+                {!post && <MaterialIcons name="face" size={30} color="#4b5666" style={styles.profile} />}
             </View>
-            <View style={styles.icon} >
-                <Button title='donate' onPress={pressHandler} />
+            <View  >
+                {post ? <Button title='UPLOAD' color='#4b5666' style={styles.upload} /> : <Button title='DONATE' color='#4b5666' onPress={pressHandler} style={styles.donate} />}
             </View>
         </View >
     );
@@ -25,19 +26,21 @@ const styles = StyleSheet.create({
         height: '100%',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
 
     },
     profile: {
         marginTop: 10,
-        marginRight: '50%',
+        marginRight: '70%',
     },
-    icon: {
+    donate: {
         marginTop: 10,
-        marginLeft: '50%',
-
+    },
+    upload: {
+        marginTop: 10,
+        marginLeft: '170%',
+        padding: '200%'
     }
-
 })
 
 export default Header;

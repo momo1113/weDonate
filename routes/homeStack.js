@@ -15,7 +15,11 @@ const screens = {
         }
     },
     Post: {
-        screen: Post
+        screen: Post,
+        navigationOptions: {
+            headerTitle: 'UPLOADING'
+        }
+
     }
 };
 const HomeStack = createStackNavigator(screens);
