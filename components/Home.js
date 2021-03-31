@@ -14,6 +14,7 @@ const Home = ({ navigation }) => {
             .then((response) => {
                 //setItems(response.data)
                 // JSON.stringify(response.data)
+                console.log(response.data)
             })
             .catch(err => {
                 console.log(err)

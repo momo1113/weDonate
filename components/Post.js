@@ -72,12 +72,26 @@ const Post = ({ navigation }) => {
         //         ]
         //     );
         // }
-
-        if (Object.keys(capturedImage).length !== 0 || (name !== '') || (location !== '')) {
-            setShowModal(true)
-        } else {
-
+        if (!name.trim()) {
+            alert('Please Enter Item Name');
+            return;
         }
+        //Check for the Email TextInput
+        if (!location.trim()) {
+            alert('Please Enter Pick Up City');
+            return;
+        }
+
+        if (!Object.keys(capturedImage).length) {
+            alert('Please Upload the Image');
+            return;
+        }
+
+        //Checked Successfully
+        //Do whatever you want
+
+        setShowModal(true)
+
     };
     console.log(capturedImage)
     console.log(name)
@@ -150,6 +164,7 @@ const Post = ({ navigation }) => {
                             mode="flat"
                             disabled={false}
                             onChangeText={name => setName(name)}
+                            required
                         />
                         <TextInput
                             style={styles.input}
@@ -157,6 +172,7 @@ const Post = ({ navigation }) => {
                             value={location}
                             placeholder="City"
                             onChangeText={location => setLocation(location)}
+                            required
                         />
                     </SafeAreaView>
 
