@@ -110,7 +110,10 @@ const Post = ({ navigation }) => {
                             justifyContent: 'center',
                             flex: 1,
                         }}>
-                            <Text style={styles.modalText}> Thanks for contributing to our community ! </Text>
+                            <Text style={styles.modalText}>
+                                Thanks for contributing to our community !
+                                We will verify all the informations and get back to you shortly.
+                             </Text>
                             <Pressable
                                 style={[styles.modalButton, styles.buttonClose]}
                                 onPress={() => setShowModal(!showModal)}
@@ -164,7 +167,7 @@ const Post = ({ navigation }) => {
                             mode="flat"
                             disabled={false}
                             onChangeText={name => setName(name)}
-                            required
+
                         />
                         <TextInput
                             style={styles.input}
@@ -172,7 +175,7 @@ const Post = ({ navigation }) => {
                             value={location}
                             placeholder="City"
                             onChangeText={location => setLocation(location)}
-                            required
+
                         />
                     </SafeAreaView>
 
@@ -278,7 +281,8 @@ const styles = StyleSheet.create({
     modalText: {
         letterSpacing: 1,
         fontSize: 16,
-        fontFamily: 'Avenir'
+        fontFamily: 'Avenir',
+        alignSelf: 'center'
     },
     modalButton: {
         borderRadius: 20,

@@ -1,9 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-import Home from '../components/Home.js'
-import Header from '../shared/Header.js'
-import Post from '../components/Post.js'
+import Home from '../components/Home.js';
+import Header from '../shared/Header.js';
+import Post from '../components/Post.js';
+import Claim from '../components/Claim.js';
 
 const screens = {
     Home: {
@@ -16,6 +17,13 @@ const screens = {
     },
     Post: {
         screen: Post,
+        navigationOptions: {
+            headerTitle: 'We Donate'
+        }
+
+    },
+    Claim: {
+        screen: Claim,
         navigationOptions: {
             headerTitle: 'We Donate'
         }
