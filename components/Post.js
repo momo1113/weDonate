@@ -14,6 +14,7 @@ const Post = ({ navigation }) => {
     const [location, setLocation] = useState('');
     const [name, setName] = useState('')
     const [showModal, setShowModal] = useState(false)
+    const [cameraType, setCameraType] = React.useState(Camera.Constants.Type.back)
     let camera = null;
 
     //handle start the camera
@@ -43,7 +44,14 @@ const Post = ({ navigation }) => {
         setPreviewVisible(false)
         setCapturedImage({})
     }
-
+    //switch font back
+    const __switchCamera = () => {
+        if (cameraType === 'back') {
+            setCameraType('front')
+        } else {
+            setCameraType('back')
+        }
+    }
     //
     const imagePressed = () => {
         setStartCamera(true)
@@ -138,12 +146,32 @@ const Post = ({ navigation }) => {
             {startCamera && !previewVisible && !upload && (
                 <Camera
                     style={{ flex: 1, width: '100%' }}
+                    type={cameraType}
                     ref={(r) => {
                         camera = r
                     }}
                 >
+
+
                     <View style={styles.takenPhotoWrapper}>
+
+                        <TouchableOpacity
+                            onPress={__switchCamera}
+                            style={{
+                                marginTop: 20,
+                                borderRadius: '50%',
+                                height: 25,
+                                width: 25
+                            }}
+                        >
+                            <Text
+                                style={styles.selfie}
+                            >
+                                {cameraType === 'front' ? '?' : '?'}
+                            </Text>
+                        </TouchableOpacity>
                         <View style={styles.innerWrapper}>
+
                             <TouchableOpacity
                                 onPress={__takePicture}
                                 style={styles.photoButton}
@@ -155,47 +183,48 @@ const Post = ({ navigation }) => {
                 </Camera>
             )
             }
-            {startCamera ? null :
-                (<View style={styles.card}>
-                    <SafeAreaView>
+            {
+                startCamera ? null :
+                    (<View style={styles.card}>
+                        <SafeAreaView>
 
-                        <TextInput
-                            style={styles.input}
-                            name="name"
-                            value={name}
-                            placeholder="Item Name"
-                            mode="flat"
-                            disabled={false}
-                            onChangeText={name => setName(name)}
+                            <TextInput
+                                style={styles.input}
+                                name="name"
+                                value={name}
+                                placeholder="Item Name"
+                                mode="flat"
+                                disabled={false}
+                                onChangeText={name => setName(name)}
 
-                        />
-                        <TextInput
-                            style={styles.input}
-                            name="location"
-                            value={location}
-                            placeholder="City"
-                            onChangeText={location => setLocation(location)}
+                            />
+                            <TextInput
+                                style={styles.input}
+                                name="location"
+                                value={location}
+                                placeholder="City"
+                                onChangeText={location => setLocation(location)}
 
-                        />
-                    </SafeAreaView>
+                            />
+                        </SafeAreaView>
 
-                    <View style={styles.upload}>
-                        <TouchableOpacity onPress={__startCamera}>
-                            <View>
-                                <Text style={styles.label}> Upload donation </Text>
-                                {capturedImage && <TouchableOpacity onPress={imagePressed}>
-                                    <Image source={{ uri: capturedImage.uri }} style={{ width: 300, height: 300 }} />
-                                </TouchableOpacity>
-                                }
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                    <Text onPress={handleUpload} style={styles.button} > UPLOAD </Text>
+                        <View style={styles.upload}>
+                            <TouchableOpacity onPress={__startCamera}>
+                                <View>
+                                    <Text style={styles.label}> Upload donation </Text>
+                                    {capturedImage && <TouchableOpacity onPress={imagePressed}>
+                                        <Image source={{ uri: capturedImage.uri }} style={{ width: 300, height: 300 }} />
+                                    </TouchableOpacity>
+                                    }
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                        <Text onPress={handleUpload} style={styles.button} > UPLOAD </Text>
 
-                </View>)
+                    </View>)
             }
             < StatusBar style="auto" />
-        </View>
+        </View >
     );
 }
 
@@ -243,6 +272,10 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         flex: 1,
         alignItems: 'center'
+    },
+    selfie: {
+        alignSelf: 'flex-end',
+        flex: 1,
     },
     photoButton: {
         width: 70,

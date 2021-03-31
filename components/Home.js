@@ -10,11 +10,11 @@ const Home = ({ navigation }) => {
 
 
     useEffect(() => {
-        axios.get('http://10.225.2.3:8000/claim')
+        axios.get('http://10.225.2.3:8000')
             .then((response) => {
                 //setItems(response.data)
                 // JSON.stringify(response.data)
-                console.log(response)
+                console.log(response.data)
             })
             .catch(err => {
                 console.log(err)
