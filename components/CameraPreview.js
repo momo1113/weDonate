@@ -1,10 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity, ImageBackground, Platform } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 
-const CameraPreview = ({ photo, reTake, setCapturedImage }) => {
+const CameraPreview = ({ photo, reTake, setCapturedImage, setUpload, setStartCamera, setPreviewVisible }) => {
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
@@ -23,17 +23,21 @@ const CameraPreview = ({ photo, reTake, setCapturedImage }) => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-
-            quality: 1
+            quality: 0
         });
 
         console.log(result.height);
         if (!result.cancelled) {
             setCapturedImage(result);
+            setStartCamera(false);
         }
     }
 
-
+    const handleUplod = () => {
+        setUpload(true)
+        setStartCamera(false)
+        setPreviewVisible(false)
+    }
     return (
         <View style={styles.container}>
             <ImageBackground
@@ -45,9 +49,14 @@ const CameraPreview = ({ photo, reTake, setCapturedImage }) => {
                         <MaterialCommunityIcons name="camera-retake-outline" size={55} color="white" />
                     </TouchableOpacity>
 
+                    <TouchableOpacity style={styles.album} onPress={handleUplod} >
+                        <FontAwesome name="check" size={55} color="white" />
+                    </TouchableOpacity>
+
                     <TouchableOpacity style={styles.album} onPress={pickImage} >
                         <MaterialCommunityIcons name="image-album" size={55} color="white" />
                     </TouchableOpacity>
+
                 </View>
             </ImageBackground>
 

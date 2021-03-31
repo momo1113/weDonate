@@ -10,7 +10,7 @@ const Post = ({ navigation }) => {
     const [startCamera, setStartCamera] = useState(false);
     const [previewVisible, setPreviewVisible] = useState(false)
     const [capturedImage, setCapturedImage] = useState({})
-
+    const [upload, setUpload] = useState(false)
 
     let camera = null;
 
@@ -32,8 +32,6 @@ const Post = ({ navigation }) => {
         //get preview of the photo and save it to database
         setPreviewVisible(true)
         MediaLibrary.saveToLibraryAsync(photo.uri)
-        console.log('new image')
-        console.log(photo)
     }
 
     //retake photos
@@ -52,7 +50,14 @@ const Post = ({ navigation }) => {
     };
     return (
         <View style={styles.container}>
-            {previewVisible && capturedImage && (<CameraPreview photo={capturedImage} reTake={__reTake} setCapturedImage={setCapturedImage} />)}
+            {previewVisible && capturedImage && (<CameraPreview
+                photo={capturedImage}
+                reTake={__reTake}
+                setCapturedImage={setCapturedImage}
+                setUpload={setUpload}
+                setStartCamera={setStartCamera}
+                setPreviewVisible={setPreviewVisible}
+            />)}
             {startCamera && !previewVisible && (
                 <Camera
                     style={{ flex: 1, width: '100%' }}
