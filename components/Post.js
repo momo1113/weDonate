@@ -40,6 +40,14 @@ const Post = ({ navigation }) => {
         setStartCamera(res)
         setPreviewVisible(false)
         setCapturedImage({})
+    }
+
+    //
+    const imagePressed = () => {
+        setStartCamera(true)
+        setPreviewVisible(false)
+        setCapturedImage({})
+        setUpload(false)
 
     }
 
@@ -48,6 +56,7 @@ const Post = ({ navigation }) => {
     const pressHandler = () => {
         navigation.goBack();
     };
+
     return (
         <View style={styles.container}>
             {previewVisible && capturedImage && (<CameraPreview
@@ -58,7 +67,7 @@ const Post = ({ navigation }) => {
                 setStartCamera={setStartCamera}
                 setPreviewVisible={setPreviewVisible}
             />)}
-            {startCamera && !previewVisible && (
+            {startCamera && !previewVisible && !upload && (
                 <Camera
                     style={{ flex: 1, width: '100%' }}
                     ref={(r) => {
@@ -84,8 +93,10 @@ const Post = ({ navigation }) => {
                         <TouchableOpacity onPress={__startCamera}>
                             <View>
                                 <Text> Upload donation </Text>
-                                {capturedImage && <Image source={{ uri: capturedImage.uri }} style={{ width: 200, height: 200 }} />}
-
+                                {capturedImage && <TouchableOpacity onPress={imagePressed}>
+                                    <Image source={{ uri: capturedImage.uri }} style={{ width: 200, height: 200 }} />
+                                </TouchableOpacity>
+                                }
                             </View>
                         </TouchableOpacity>
                     </View>

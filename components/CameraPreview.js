@@ -29,7 +29,6 @@ const CameraPreview = ({ photo, reTake, setCapturedImage, setUpload, setStartCam
         console.log(result.height);
         if (!result.cancelled) {
             setCapturedImage(result);
-            setStartCamera(false);
         }
     }
 
