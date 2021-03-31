@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View, Button, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, Image, SafeAreaView, TextInput, Modal, Alert, Pressable } from 'react-native';
 import CameraPreview from './CameraPreview'
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
@@ -11,7 +11,9 @@ const Post = ({ navigation }) => {
     const [previewVisible, setPreviewVisible] = useState(false)
     const [capturedImage, setCapturedImage] = useState({})
     const [upload, setUpload] = useState(false)
-
+    const [location, setLocation] = useState('');
+    const [name, setName] = useState('')
+    const [showModal, setShowModal] = useState(false)
     let camera = null;
 
     //handle start the camera
@@ -48,17 +50,66 @@ const Post = ({ navigation }) => {
         setPreviewVisible(false)
         setCapturedImage({})
         setUpload(false)
-
     }
 
     // console.log(photo)
+
+
+
+
     //handle screen go back 
-    const pressHandler = () => {
-        navigation.goBack();
+    const handleUpload = () => {
+        // if (name === '' || location === '' || !capturedImage) {
+        //     Alert.alert(
+        //         "Please fill the information",
+        //         [
+        //             {
+        //                 text: "Cancel",
+        //                 onPress: () => console.log("Cancel Pressed"),
+        //                 style: "cancel"
+        //             },
+        //             { text: "OK", onPress: () => console.log("OK Pressed") }
+        //         ]
+        //     );
+        // }
+
+        if (Object.keys(capturedImage).length !== 0 || (name !== '') || (location !== '')) {
+            setShowModal(true)
+        } else {
+
+        }
     };
+    console.log(capturedImage)
+    console.log(name)
+    console.log(location)
+    console.log(showModal)
 
     return (
         <View style={styles.container}>
+
+            { showModal && (
+                <TouchableOpacity>
+                    <Modal>
+                        <View style={{
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flex: 1,
+                        }}>
+                            <Text style={styles.modalText}> Thanks for contributing to our community ! </Text>
+                            <Pressable
+                                style={[styles.modalButton, styles.buttonClose]}
+                                onPress={() => setShowModal(!showModal)}
+                            >
+                                <Text style={styles.textStyle}>CLOSE</Text>
+                            </Pressable>
+                        </View>
+                    </Modal>
+                </TouchableOpacity>
+            )}
+
+
+
             {previewVisible && capturedImage && (<CameraPreview
                 photo={capturedImage}
                 reTake={__reTake}
@@ -78,7 +129,7 @@ const Post = ({ navigation }) => {
                         <View style={styles.innerWrapper}>
                             <TouchableOpacity
                                 onPress={__takePicture}
-                                style={styles.button}
+                                style={styles.photoButton}
                             >
                             </TouchableOpacity>
                         </View>
@@ -88,19 +139,39 @@ const Post = ({ navigation }) => {
             )
             }
             {startCamera ? null :
-                (<View>
+                (<View style={styles.card}>
+                    <SafeAreaView>
+
+                        <TextInput
+                            style={styles.input}
+                            name="name"
+                            value={name}
+                            placeholder="Item Name"
+                            mode="flat"
+                            disabled={false}
+                            onChangeText={name => setName(name)}
+                        />
+                        <TextInput
+                            style={styles.input}
+                            name="location"
+                            value={location}
+                            placeholder="City"
+                            onChangeText={location => setLocation(location)}
+                        />
+                    </SafeAreaView>
+
                     <View style={styles.upload}>
                         <TouchableOpacity onPress={__startCamera}>
                             <View>
-                                <Text> Upload donation </Text>
+                                <Text style={styles.label}> Upload donation </Text>
                                 {capturedImage && <TouchableOpacity onPress={imagePressed}>
-                                    <Image source={{ uri: capturedImage.uri }} style={{ width: 200, height: 200 }} />
+                                    <Image source={{ uri: capturedImage.uri }} style={{ width: 300, height: 300 }} />
                                 </TouchableOpacity>
                                 }
                             </View>
                         </TouchableOpacity>
                     </View>
-                    <Button title="back" onPress={pressHandler} />
+                    <Text onPress={handleUpload} style={styles.button} > UPLOAD </Text>
 
                 </View>)
             }
@@ -117,10 +188,27 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    card: {
+        shadowOffset: { width: 1, height: 1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+    },
+
+
+    label: {
+        margin: 'auto',
+        fontSize: 24,
+        textAlign: 'center',
+        letterSpacing: 3,
+        fontFamily: 'Avenir',
+        paddingTop: 20
+    },
     upload: {
         borderTopColor: '#333',
-        borderWidth: 2,
-        padding: 50,
+        borderWidth: 1,
+        marginTop: 2,
+        padding: 5,
         marginBottom: 10,
     },
     takenPhotoWrapper: {
@@ -137,13 +225,59 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center'
     },
-    button: {
+    photoButton: {
         width: 70,
         height: 70,
         bottom: 40,
         borderRadius: 50,
         backgroundColor: '#fff'
-    }
+    },
+    input: {
+        height: 40,
+        borderBottomWidth: 1,
+        borderBottomColor: '#4b5666',
+        margin: 12,
+        textAlign: 'center',
+        shadowOffset: { width: 1, height: 1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        borderColor: '#333',
+        fontFamily: 'Avenir',
+        fontSize: 15,
+    },
+    button: {
+        backgroundColor: '#4b5666',
+        borderColor: 'white',
+        borderWidth: 1,
+        borderRadius: 3,
+        color: 'white',
+        fontSize: 18,
+        overflow: 'hidden',
+        padding: 12,
+        textAlign: 'center',
+        letterSpacing: 7,
+        fontFamily: 'Avenir'
+    },
+    modalText: {
+        letterSpacing: 1,
+        fontSize: 16,
+        fontFamily: 'Avenir'
+    },
+    modalButton: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+        marginTop: 20,
+    },
+    buttonClose: {
+        backgroundColor: '#4b5666',
+        margin: 12,
+    },
+    textStyle: {
+        color: "white",
+        textAlign: "center"
+    },
 })
 
 export default Post;

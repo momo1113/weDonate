@@ -17,7 +17,7 @@ const screens = {
     Post: {
         screen: Post,
         navigationOptions: {
-            headerTitle: 'UPLOADING'
+            headerTitle: 'We Donate'
         }
 
     }

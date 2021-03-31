@@ -1,9 +1,27 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity, Button } from 'react-native';
-import items from '../items/items.js'
+// import items from '../items/items.js'
+import axios from 'axios';
 
 const Home = ({ navigation }) => {
+    const [items, setItems] = useState([])
+
+
+
+    useEffect(() => {
+        axios.get('/')
+            .then((response) => {
+                //setItems(response.data)
+                // JSON.stringify(response.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    });
+
+
+
     const renderItem = ({ item, key }) => {
         return (
             <TouchableOpacity>

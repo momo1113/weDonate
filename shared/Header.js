@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'
 
-const Header = ({ navigation, post }) => {
+const Header = ({ navigation }) => {
     const pressHandler = () => {
         navigation.navigate('Post')
     }
@@ -11,10 +11,10 @@ const Header = ({ navigation, post }) => {
     return (
         <View style={styles.header}>
             <View   >
-                {!post && <MaterialIcons name="face" size={30} color="#4b5666" style={styles.profile} />}
+                <MaterialIcons name="face" size={30} color="#4b5666" style={styles.profile} />
             </View>
             <View  >
-                {post ? <Button title='UPLOAD' color='#4b5666' style={styles.upload} /> : <Button title='DONATE' color='#4b5666' onPress={pressHandler} style={styles.donate} />}
+                <Button title='DONATE' color='#4b5666' onPress={pressHandler} style={styles.donate} />
             </View>
         </View >
     );
