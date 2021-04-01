@@ -27,6 +27,8 @@ Check full demo on [youtube](https://youtu.be/7nU0J_PIhmU)
 [![Alt text for your video](wedonate.gif)](https://www.youtube.com/watch?v=7nU0J_PIhmU)
 
 
+
+
 ## Contributing
 The application still under development. Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
