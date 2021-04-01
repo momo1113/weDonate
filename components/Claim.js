@@ -13,9 +13,8 @@ import axios from 'axios';
 
 const Claim = ({ navigation }) => {
     const [name, setName] = useState('');
-    const pickupLocation = navigation.getParam('location');
-
-    console.log(name)
+    const pickupLocation = navigation.getParam('url');
+    console.log(pickupLocation)
     const handleClaim = () => {
 
         if (!name.trim()) {
@@ -29,25 +28,21 @@ const Claim = ({ navigation }) => {
             }
         })
             .then(response => {
-                alert('Donator will message you directly')
+                alert('Donator will message you directly with all the pickup details')
             }).catch(err => {
                 alert('Fail to send message')
             })
 
-        if (!name.trim()) {
-            alert('Please Enter Your Name');
-            return;
-        }
     }
 
     return (
         <View style={styles.container}>
-            <View style={{ borderWidth: 1 }}>
+            {/* <View style={{ borderWidth: 1, padding: 50 }}>
                 <View>
                     <Text> pick up location</Text>
                     <Text>{pickupLocation}</Text>
                 </View>
-            </View>
+            </View> */}
             <View >
                 <SafeAreaView>
                     <TextInput

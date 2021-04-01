@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity, Alert } from
 import axios from 'axios';
 const Home = ({ navigation }) => {
     const [items, setItems] = useState([])
+    const [itemClaimed, setItemClaimed] = useState(false);
     useEffect(() => {
         axios.get('http://ec2-54-219-9-53.us-west-1.compute.amazonaws.com/')
             .then((response) => {
@@ -13,8 +14,6 @@ const Home = ({ navigation }) => {
                 console.log(err)
             })
     });
-
-
     const renderItem = ({ item, key }) => {
         return (
             <TouchableOpacity onPress={() => navigation.push('Claim', item)}>

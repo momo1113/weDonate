@@ -17,8 +17,6 @@ const CameraPreview = ({ photo, reTake, setCapturedImage, setUpload, setStartCam
         )();
     }, [])
 
-
-
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -63,14 +61,12 @@ const CameraPreview = ({ photo, reTake, setCapturedImage, setUpload, setStartCam
     )
 }
 
-
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'transparent',
         flex: 1,
         width: '100%',
         height: '100%',
-
     },
 
     bgImage: {

@@ -21,7 +21,7 @@ const Post = ({ navigation }) => {
     const selfie = <Ionicons name="md-camera-reverse-outline" size={24} color="black" />
 
     //handle start the camera
-    const __startCamera = async () => {
+    const startCameraFunc = async () => {
         const { status } = await Camera.requestPermissionsAsync();
         if (status === 'granted') {
             setStartCamera(true)
@@ -31,7 +31,7 @@ const Post = ({ navigation }) => {
     }
 
     //handle take pictures
-    const __takePicture = async () => {
+    const takePicture = async () => {
         if (!camera) return
         const photo = await camera.takePictureAsync()
         setCapturedImage(photo)
@@ -42,13 +42,13 @@ const Post = ({ navigation }) => {
 
     //retake photos
 
-    const __reTake = (res) => {
+    const reTake = (res) => {
         setStartCamera(res)
         setPreviewVisible(false)
         setCapturedImage({})
     }
     //switch font back
-    const __switchCamera = () => {
+    const switchCamera = () => {
         if (cameraType === 'back') {
             setCameraType('front')
         } else {
@@ -136,7 +136,7 @@ const Post = ({ navigation }) => {
 
             {previewVisible && capturedImage && (<CameraPreview
                 photo={capturedImage}
-                reTake={__reTake}
+                reTake={reTake}
                 setCapturedImage={setCapturedImage}
                 setUpload={setUpload}
                 setStartCamera={setStartCamera}
@@ -159,12 +159,12 @@ const Post = ({ navigation }) => {
 
                             }}
                         >
-                            <Ionicons onPress={__switchCamera} name="md-camera-reverse-outline" size={50} color="white" />
+                            <Ionicons onPress={switchCamera} name="md-camera-reverse-outline" size={50} color="white" />
                         </TouchableOpacity>
                         <View style={styles.innerWrapper}>
 
                             <TouchableOpacity
-                                onPress={__takePicture}
+                                onPress={takePicture}
                                 style={styles.photoButton}
                             >
                             </TouchableOpacity>
@@ -200,7 +200,7 @@ const Post = ({ navigation }) => {
                         </SafeAreaView>
 
                         <View style={styles.upload}>
-                            <TouchableOpacity onPress={__startCamera}>
+                            <TouchableOpacity onPress={startCameraFunc}>
                                 <View>
                                     <Text style={styles.label}> Upload donation </Text>
                                     {capturedImage && <TouchableOpacity onPress={imagePressed}>
