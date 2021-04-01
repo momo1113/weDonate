@@ -11,13 +11,19 @@ import axios from 'axios';
 // const { manifest } = Constants;
 // const uri = `http://${manifest.debuggerHost.split(':').shift()}:8000`;
 
-const Claim = () => {
+const Claim = ({ navigation }) => {
     const [name, setName] = useState('');
+    const pickupLocation = navigation.getParam('location');
 
     console.log(name)
     const handleClaim = () => {
+
+        if (!name.trim()) {
+            alert('Please Enter Your Name');
+            return;
+        }
         //do something about the claim, send message on twillio
-        axios.get('http://10.225.2.3:8000/claim', {
+        axios.get('http://ec2-54-219-9-53.us-west-1.compute.amazonaws.com/claim', {
             params: {
                 name
             }
@@ -27,10 +33,21 @@ const Claim = () => {
             }).catch(err => {
                 alert('Fail to send message')
             })
+
+        if (!name.trim()) {
+            alert('Please Enter Your Name');
+            return;
+        }
     }
 
     return (
         <View style={styles.container}>
+            <View style={{ borderWidth: 1 }}>
+                <View>
+                    <Text> pick up location</Text>
+                    <Text>{pickupLocation}</Text>
+                </View>
+            </View>
             <View >
                 <SafeAreaView>
                     <TextInput
@@ -41,8 +58,6 @@ const Claim = () => {
                         onChangeText={text => setName(text)}
                     />
                 </SafeAreaView>
-
-
                 <Text onPress={handleClaim} style={styles.button}> CLAIM </Text>
             </View>
             < StatusBar style="auto" />
@@ -61,16 +76,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    card: {
+        shadowOffset: { width: 100, height: 1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.5,
+        shadowRadius: 2,
+    },
     input: {
         height: 40,
         borderBottomWidth: 1,
         borderBottomColor: '#4b5666',
         margin: 12,
         textAlign: 'center',
-        shadowOffset: { width: 1, height: 1 },
-        shadowColor: '#333',
-        shadowOpacity: 0.3,
-        shadowRadius: 2,
         borderColor: '#333',
         fontFamily: 'Avenir',
         fontSize: 15,

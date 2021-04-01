@@ -1,9 +1,10 @@
 
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View, Button, TouchableOpacity, Image, SafeAreaView, TextInput, Modal, Alert, Pressable } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, TextInput, Modal, Alert, Pressable } from 'react-native';
 import CameraPreview from './CameraPreview'
 import { Camera } from 'expo-camera';
+import { Ionicons } from '@expo/vector-icons';
 import * as MediaLibrary from 'expo-media-library';
 
 const Post = ({ navigation }) => {
@@ -16,6 +17,8 @@ const Post = ({ navigation }) => {
     const [showModal, setShowModal] = useState(false)
     const [cameraType, setCameraType] = React.useState(Camera.Constants.Type.back)
     let camera = null;
+
+    const selfie = <Ionicons name="md-camera-reverse-outline" size={24} color="black" />
 
     //handle start the camera
     const __startCamera = async () => {
@@ -101,10 +104,6 @@ const Post = ({ navigation }) => {
         setShowModal(true)
 
     };
-    console.log(capturedImage)
-    console.log(name)
-    console.log(location)
-    console.log(showModal)
 
     return (
         <View style={styles.container}>
@@ -152,23 +151,15 @@ const Post = ({ navigation }) => {
                     }}
                 >
 
-
                     <View style={styles.takenPhotoWrapper}>
-
                         <TouchableOpacity
-                            onPress={__switchCamera}
                             style={{
-                                marginTop: 20,
-                                borderRadius: '50%',
-                                height: 25,
-                                width: 25
+                                marginTop: '-7.5%',
+                                marginLeft: '10%',
+
                             }}
                         >
-                            <Text
-                                style={styles.selfie}
-                            >
-                                {cameraType === 'front' ? '?' : '?'}
-                            </Text>
+                            <Ionicons onPress={__switchCamera} name="md-camera-reverse-outline" size={50} color="white" />
                         </TouchableOpacity>
                         <View style={styles.innerWrapper}>
 
@@ -271,7 +262,9 @@ const styles = StyleSheet.create({
     innerWrapper: {
         alignSelf: 'center',
         flex: 1,
-        alignItems: 'center'
+        //alignItems: 'center',
+        marginLeft: 50
+
     },
     selfie: {
         alignSelf: 'flex-end',

@@ -1,20 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity, Alert } from 'react-native';
-import items from '../items/items.js'
 import axios from 'axios';
-
 const Home = ({ navigation }) => {
-    // const [items, setItems] = useState([])
-
-
-
+    const [items, setItems] = useState([])
     useEffect(() => {
-        axios.get('http://10.225.2.3:8000')
+        axios.get('http://ec2-54-219-9-53.us-west-1.compute.amazonaws.com/')
             .then((response) => {
-                //setItems(response.data)
-                // JSON.stringify(response.data)
-                console.log(response.data)
+                setItems(response.data)
             })
             .catch(err => {
                 console.log(err)
@@ -22,14 +15,9 @@ const Home = ({ navigation }) => {
     });
 
 
-    const handleClaim = () => {
-        navigation.push('Claim')
-
-    }
-
     const renderItem = ({ item, key }) => {
         return (
-            <TouchableOpacity onPress={handleClaim}>
+            <TouchableOpacity onPress={() => navigation.push('Claim', item)}>
                 <View style={styles.card}>
                     <Image
                         style={styles.item}
@@ -46,7 +34,6 @@ const Home = ({ navigation }) => {
     }
     return (
         <View style={styles.container}>
-
             <View style={styles.images}>
                 <FlatList
                     numColumns={2}
