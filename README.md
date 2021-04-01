@@ -1,8 +1,7 @@
 [![Generic badge](https://img.shields.io/badge/npm-7.5.3-<COLOR>.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/node-v15.10.0-orange.svg)](https://shields.io/)
-[![Generic badge](https://img.shields.io/badge/react native-0.63.2-yellowgreen.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/reactnative-0.63.2-yellowgreen.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/License-MIT-informational.svg)](https://shields.io/)
-[![Generic badge](https://img.shields.io/badge/Developing-informational.svg)](https://shields.io/)
 # We Donate
 
 
