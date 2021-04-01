@@ -14,8 +14,8 @@ npm install
 
 ## Demo
 ```bash
-[![Alt text for your video](wedonate.gif)](https://www.youtube.com/watch?v=7nU0J_PIhmU)
 ```
+[![Alt text for your video](wedonate.gif)](https://www.youtube.com/watch?v=7nU0J_PIhmU)
 
 
 ## Contributing
