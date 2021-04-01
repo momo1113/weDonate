@@ -13,7 +13,7 @@ Use the package manager [npm](https://pip.pypa.io/en/stable/) install foobar.
 npm install 
 ```
 
-<iframe src='//gifs.com/embed/wedonate-xnZPll' frameborder='0' scrolling='no' width='440' height='400' style='-webkit-backface-visibility: hidden;-webkit-transform: scale(1);' ></iframe>
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=7nU0J_PIhmU)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
