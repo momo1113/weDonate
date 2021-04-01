@@ -13,7 +13,7 @@ Use the package manager [npm](https://pip.pypa.io/en/stable/) install foobar.
 npm install 
 ```
 
-https://j.gifs.com/xnZPll.gif
+<iframe src='//gifs.com/embed/wedonate-xnZPll' frameborder='0' scrolling='no' width='440' height='400' style='-webkit-backface-visibility: hidden;-webkit-transform: scale(1);' ></iframe>
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
