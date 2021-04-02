@@ -40,7 +40,7 @@ Check full demo on [youtube](https://youtu.be/7nU0J_PIhmU)
 
 
 ## Contributing
-The application still under development. Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+The application is still under development. Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
