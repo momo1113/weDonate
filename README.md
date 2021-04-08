@@ -14,7 +14,7 @@ Nowadays, we want more and more. Even those things we don't need. I believe ther
 ## Installation
 
 Use the package manager [npm](https://pip.pypa.io/en/stable/) install foobar.
-[wedonate_react_native_client](https://github.com/momo1113/weDonate)
+[wedonate_react_native_server](https://github.com/momo1113/wedonate_server)
 
 ```bash
 npm install 
