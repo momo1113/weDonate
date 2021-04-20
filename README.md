@@ -19,6 +19,7 @@ Use the package manager [npm](https://pip.pypa.io/en/stable/) install foobar.
 ```bash
 npm install 
 npm start
+Scan Barcode
 ```
 
 ## Demo
